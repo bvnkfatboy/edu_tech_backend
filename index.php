@@ -22,6 +22,12 @@
               $output = str_replace('%TITLE%', $title, $output);
               echo $output;
               break;
+          case ('logout'):
+              include_once 'component/auth/logout.php';
+              $title = "เข้าสู่ระบบ";
+              $output = str_replace('%TITLE%', $title, $output);
+              echo $output;
+              break;
           case ('dashboard'):
             include_once 'component/dashboard.php';
             $title = "Dashboard";

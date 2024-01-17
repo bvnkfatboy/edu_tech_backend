@@ -13,7 +13,14 @@ if(isset($_POST['auth'])){
         $password = $user->escape_string($_POST['password']);
     
         $auth = $user->check_login($username, $password);
-    
+
+        // ตรวจสอบว่าได้ทำเครื่องหมายที่ช่อง "Remember Me" หรือไม่
+        if (isset($_POST["remember"])) {
+            // ตั้งค่าคุกกี้สำหรับชื่อผู้ใช้และโทเค็น (คุณสามารถสร้างโทเค็นเฉพาะได้)
+            setcookie("remember_username", $username, time() + (30 * 24 * 3600), "/"); // 30 days
+            setcookie("remember_token", "unique_token_here", time() + (30 * 24 * 3600), "/"); // 30 days
+        }
+        
         if(!$auth){
             // เพิ่ม SweetAlert2 ที่นี่
             echo '<script>
