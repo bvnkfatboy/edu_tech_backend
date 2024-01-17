@@ -1,58 +1,72 @@
 <?php
-//start session
-session_start();
- 
 include_once('user.php');
- 
+include_once('component/security/data_encpt.php');
+
 $user = new User();
+$encryptionHelper = new EncryptionHelper();
 
-if(isset($_POST['auth'])){
-    if($_POST['auth'] == "login") {
+// Function to set remember me cookies
+function setRememberMeCookies($username, $password, $encryptionHelper) {
+    setcookie("remember_username", $encryptionHelper->encryptData($username), time() + (30 * 24 * 3600), "/");
+    setcookie("remember_password", $encryptionHelper->encryptData($password), time() + (30 * 24 * 3600), "/");
+}
 
-        $username = $user->escape_string($_POST['username']);
-        $password = $user->escape_string($_POST['password']);
+// Check if remember_username and remember_password cookies exist
+if (isset($_COOKIE['remember_username']) && isset($_COOKIE['remember_password'])) {
+    $encryptedUsername = $_COOKIE['remember_username'];
+    $encryptedPassword = $_COOKIE['remember_password'];
+
+    $username = $user->escape_string($encryptionHelper->decryptData($encryptedUsername));
+    $password = $user->escape_string($encryptionHelper->decryptData($encryptedPassword));
+
+    $auth = $user->checkLogin($username, $password);
+
+    if ($auth) {
+        // Auto login successful, redirect to dashboard
+        $_SESSION['acc_id'] = $auth;
+        header("Location: ?page=dashboard");
+        exit();
+    }
+}
+
+if(isset($_POST['auth']) && $_POST['auth'] == "login") {
+    $username = $user->escape_string($_POST['username']);
+    $password = $user->escape_string($_POST['password']);
     
-        $auth = $user->check_login($username, $password);
+    $auth = $user->checkLogin($username, $password);
 
-        // ตรวจสอบว่าได้ทำเครื่องหมายที่ช่อง "Remember Me" หรือไม่
-        if (isset($_POST["remember"])) {
-            // ตั้งค่าคุกกี้สำหรับชื่อผู้ใช้และโทเค็น (คุณสามารถสร้างโทเค็นเฉพาะได้)
-            setcookie("remember_username", $username, time() + (30 * 24 * 3600), "/"); // 30 days
-            setcookie("remember_token", "unique_token_here", time() + (30 * 24 * 3600), "/"); // 30 days
-        }
+    if (isset($_POST["remember"]) && $auth) {
+        // Set cookies for remember me
+        setRememberMeCookies($username, $password, $encryptionHelper);
+    }
         
-        if(!$auth){
-            // เพิ่ม SweetAlert2 ที่นี่
-            echo '<script>
-                    Swal.fire({
-                        icon: "error",
-                        title: "เข้าสู่ระบบผิดพลาด",
-                        text: "ชื่อผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง",
-                    });
-                 </script>';
-        }
-        else{
-            echo '<script>
-                    Swal.fire({
-                        icon: "success",
-                        title: "เข้าสู่ระบบเสร็จสิ้น",
-                        text: "คุณจะถูกเปลี่ยนเส้นทางภายใน 2 วินาที",
-                    }).then(function() {
-                        // นับเวลาถอยหลังและ Redirect ไปที่หน้าอื่น
-                        var countdown = 2;
-                        var countdownInterval = setInterval(function() {
-                            countdown--;
-                            if (countdown <= 0) {
-                                clearInterval(countdownInterval);
-                                window.location.href = "?page=dashboard";
-                            }
-                        }, 1000);
-                    });
-                 </script>';
-        }
+    if (!$auth) {
+        // Show error alert
+        echo '<script>
+                Swal.fire({
+                    icon: "error",
+                    title: "เข้าสู่ระบบผิดพลาด",
+                    text: "ชื่อผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง",
+                });
+             </script>';
+    } else {
+        // Login successful, redirect to dashboard
+        $_SESSION['acc_id'] = $auth;
+        echo '<script>
+                Swal.fire({
+                    icon: "success",
+                    title: "แจ้งเตือน",
+                    text: "เข้าสู่ระบบเสร็จสิ้น",
+                }).then(function(result) {
+                    if (result.isConfirmed) {
+                        window.location.href = "?page=dashboard";
+                    }
+                });
+             </script>';
     }
 }
 ?>
+
 
 <section class="bg-gray-50 light:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

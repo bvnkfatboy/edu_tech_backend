@@ -1,6 +1,6 @@
 <?php
 include_once('config.php');
- 
+include_once('./component/security/data_encpt.php');
 class User extends DbConnection{
  
     public function __construct(){
@@ -8,15 +8,17 @@ class User extends DbConnection{
         parent::__construct();
     }
  
-    public function check_login($username, $password){
-        $sql = "SELECT * FROM accounts WHERE acc_user = '$username' AND acc_pass = '$password'";
-        $query = $this->conn->query($sql);
- 
-        if($query->num_rows > 0){
-            $row = $query->fetch_array();
+    public function checkLogin($username, $password) {
+        $sql = "SELECT * FROM accounts WHERE acc_user = ? AND acc_pass = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_array();
             return $row['acc_id'];
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -31,4 +33,8 @@ class User extends DbConnection{
  
         return $this->conn->real_escape_string($value);
     }
+
+
+
+
 }

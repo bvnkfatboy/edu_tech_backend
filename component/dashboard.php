@@ -1,7 +1,4 @@
 
-
-
-
 <?php include_once("component/layout/sidebar.php") ?>
 
 <div class="p-4 sm:ml-64">
