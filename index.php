@@ -14,7 +14,7 @@
     
     <?php 
       session_start();
-      include_once('config.php');
+      
       $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard' ;
       // if (!isset($_SESSION['acc_id']) && $_GET['page'] !== 'login') {
       //   echo '
@@ -66,8 +66,15 @@
             echo $output;
             break;
           case ('carousal_slide'):
-            include_once 'component/carousal-index-slide.php';
+            include_once 'component/carousal_index_slide.php';
             $title = "Carousal Index Slide";
+            $output = str_replace('%TITLE%', $title, $output);
+            echo $output;
+            break;
+
+          case ('delete'):
+            include_once 'component/management/delete.php';
+            $title = "DELETE";
             $output = str_replace('%TITLE%', $title, $output);
             echo $output;
             break;

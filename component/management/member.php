@@ -1,5 +1,5 @@
 <?php 
-
+include_once('config.php');
 include_once('component/auth/user.php');
 include_once('component/security/data_encpt.php');
 
