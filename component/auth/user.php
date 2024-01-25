@@ -1,5 +1,4 @@
 <?php
-include_once('config.php');
 include_once('./component/security/data_encpt.php');
 
 class User extends DbConnection{

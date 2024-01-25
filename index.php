@@ -11,9 +11,10 @@
   <?php $output = '<title>%TITLE%</title>'; ?>
 </head>
 <body class="font-kanit">
-
+    
     <?php 
       session_start();
+      include_once('config.php');
       $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard' ;
       // if (!isset($_SESSION['acc_id']) && $_GET['page'] !== 'login') {
       //   echo '
@@ -51,20 +52,27 @@
               $output = str_replace('%TITLE%', $title, $output);
               echo $output;
               break;
-          case ('dashboard'):
-            include_once 'component/dashboard.php';
-            $title = "Dashboard";
-            $output = str_replace('%TITLE%', $title, $output);
-            echo $output;
-            break;
-
-
           case ('member'):
             include_once 'component/management/member.php';
             $title = "Member";
             $output = str_replace('%TITLE%', $title, $output);
             echo $output;
             break;
+    
+          case ('dashboard'):
+            include_once 'component/dashboard.php';
+            $title = "Dashboard";
+            $output = str_replace('%TITLE%', $title, $output);
+            echo $output;
+            break;
+          case ('carousal_slide'):
+            include_once 'component/carousal-index-slide.php';
+            $title = "Carousal Index Slide";
+            $output = str_replace('%TITLE%', $title, $output);
+            echo $output;
+            break;
+
+
 
           default:
               // include_once 'error404.php';
