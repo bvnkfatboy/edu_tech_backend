@@ -148,7 +148,7 @@ if (isset($_GET['delete_img'])) {
 ?>
 
 
-<!-- <?php include_once("component/layout/sidebar.php") ?> -->
+<?php include_once("component/layout/sidebar.php") ?>
 
 <div id="imageModal" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center" onclick="closeModal()">
     <div class="modal-content bg-white p-4 rounded-lg" style="max-width:1500px;" onclick="event.stopPropagation()">
@@ -192,18 +192,6 @@ if (isset($_GET['delete_img'])) {
                                 </svg>
                             </div>
                         </a>
-
-
-                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                            แก้ไข
-                            <div class="pl-1">
-                                <svg class="w-5 h-5 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd" d="M11.3 6.2H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11c1.1 0 2-1 2-2.1V11l-4 4.2c-.3.3-.7.6-1.2.7l-2.7.6c-1.7.3-3.3-1.3-3-3.1l.6-2.9c.1-.5.4-1 .7-1.3l3-3.1Z" clip-rule="evenodd" />
-                                    <path fill-rule="evenodd" d="M19.8 4.3a2.1 2.1 0 0 0-1-1.1 2 2 0 0 0-2.2.4l-.6.6 2.9 3 .5-.6a2.1 2.1 0 0 0 .6-1.5c0-.2 0-.5-.2-.8Zm-2.4 4.4-2.8-3-4.8 5-.1.3-.7 3c0 .3.3.7.6.6l2.7-.6.3-.1 4.7-5Z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </a>
-
                         <a href="?page=carousal_slide&&delete_img=<?php echo $row['img_id']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                             ลบ
                             <div class="pl-1">

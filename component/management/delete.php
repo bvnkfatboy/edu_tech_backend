@@ -27,7 +27,7 @@ switch ($delete) {
                 unlink($file_to_delete);
                 header('Location: ?page=carousal_slide');
             } else {
-                echo "Record deleted successfully, but file not found on the server.";
+                header('Location: ?page=carousal_slide');
             }
         }
         $connection->close();
