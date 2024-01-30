@@ -30,6 +30,7 @@ switch ($delete) {
                 header('Location: ?page=carousal_slide');
             }
         }
-        $connection->close();
+
 }
+$connection->close();
 ?>

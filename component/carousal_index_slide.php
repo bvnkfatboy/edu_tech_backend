@@ -31,8 +31,9 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
 
                 // บันทึกไฟล์
                 if (move_uploaded_file($_FILES['imagepc']['tmp_name'], $upload_file)) {
+                    $upload_url = $myURL.''. $upload_file;
                     $insert_sql = "INSERT INTO carousel_img_slide (img_resource, img_source, img_regdate) 
-                    VALUES ('$upload_file', 'คอมพิวเตอร์', NOW())";
+                    VALUES ('$upload_url', 'คอมพิวเตอร์', NOW())";
                     if ($connection->query($insert_sql) === TRUE) {
                         // สำเร็จ
                         echo '
@@ -150,8 +151,8 @@ if (isset($_GET['delete_img'])) {
 
 <?php include_once("component/layout/sidebar.php") ?>
 
-<div id="imageModal" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center" onclick="closeModal()">
-    <div class="modal-content bg-white p-4 rounded-lg" style="max-width:1500px;" onclick="event.stopPropagation()">
+<div id="imageModal" class="z-50 fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center " onclick="closeModal()">
+    <div class="modal-content rounded-lg animate__animated animate__fadeIn" style="max-width:1500px;" onclick="event.stopPropagation()">
         <!-- <span class="absolute top-0 right-0 m-4 text-2xl cursor-pointer" onclick="closeModal()">&times;</span> -->
         <img class="w-full" id="modalImage" alt="" />
     </div>
@@ -407,6 +408,6 @@ if (isset($_GET['delete_img'])) {
     }
 
     function closeModal() {
-        document.getElementById('imageModal').classList.add('hidden');
+        document.getElementById('imageModal').classList.add('animate__animated','animate__fadeIn','animate__faster','hidden');
     }
 </script>

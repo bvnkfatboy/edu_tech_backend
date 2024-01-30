@@ -1,0 +1,4 @@
+เส้น API 
+
+ฐาน carousal_img
+http://localhost/edu_tech_backend/component/API/getAPI.php?database=carousal_img

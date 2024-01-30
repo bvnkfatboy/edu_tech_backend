@@ -27,4 +27,12 @@ class DbConnection{
         return $this->conn;
     }
 }
+
+
+?>
+
+<?php 
+
+$myURL = 'http://' . $_SERVER['HTTP_HOST'] . '/edu_tech_backend/';
+
 ?>
