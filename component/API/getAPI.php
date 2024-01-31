@@ -1,5 +1,6 @@
 <?php 
 header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
 include_once('../../config.php');
 $dbConnection = new DbConnection();
 $connection = $dbConnection->getConnection();
@@ -10,6 +11,15 @@ if ($database != '') {
     switch ($database) {
         case ('carousal_img'):
             $sql = "SELECT * FROM carousel_img_slide";
+            break;
+        case ('gallery'):
+            $sql = "SELECT * FROM gallery";
+            break;
+        case ('article'):
+            $sql = "SELECT * FROM article";
+            break;
+        case ('video'):
+            $sql = "SELECT * FROM video";
             break;
         default:
             echo json_encode(["error" => "Invalid type"],JSON_UNESCAPED_UNICODE);

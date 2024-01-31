@@ -73,6 +73,25 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
+      
+    case ('gallery'):
+      include_once 'component/image_gallery.php';
+      $title = "Image gallery";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+    case ('article'):
+      include_once 'component/article.php';
+      $title = "Article";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+    case ('video'):
+      include_once 'component/video.php';
+      $title = "Video";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
 
     case ('delete'):
       include_once 'component/management/getDelete.php';

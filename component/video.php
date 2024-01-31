@@ -7,10 +7,11 @@ $connection = $dbConnection->getConnection();
 
 
 // var_dump($_POST);
-if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
+if (isset($_POST['video']) && $_POST['video'] == "create") {
     $option = $_POST['option-image-category'];
     $imgonweb = $_POST['imageweb'];
-
+    $videotitle = $_POST['videotitle'];
+    $videolink = $_POST['videolink'];
     if ($option == 'PC') {
 
         if (isset($_FILES['imagepc']) && $_FILES['imagepc']['error'] === UPLOAD_ERR_OK) {
@@ -21,7 +22,7 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
 
             if (in_array($file_extension, $allowed_types)) {
 
-                $upload_dir = 'dist/img/carousal/';
+                $upload_dir = 'dist/img/video/';
                 $original_file_name = $_FILES['imagepc']['name'];
 
                 $file_extension = pathinfo($original_file_name, PATHINFO_EXTENSION);
@@ -32,8 +33,8 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
                 // บันทึกไฟล์
                 if (move_uploaded_file($_FILES['imagepc']['tmp_name'], $upload_file)) {
                     $upload_url = $myURL.''. $upload_file;
-                    $insert_sql = "INSERT INTO carousel_img_slide (img_resource, img_source, img_regdate,img_location) 
-                    VALUES ('$upload_url', 'คอมพิวเตอร์', NOW(),'$upload_file')";
+                    $insert_sql = "INSERT INTO video (video_title , img_resource, img_source,video_link, video_update,img_location) 
+                    VALUES ('$videotitle','$upload_url', 'คอมพิวเตอร์','$videolink', NOW(),'$upload_file')";
                     if ($connection->query($insert_sql) === TRUE) {
                         // สำเร็จ
                         echo '
@@ -44,7 +45,7 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
                                     text: "ข้อมูลถูกบันทึกลงในฐานข้อมูล",
                             }).then(function(result) {
                                     if (result.isConfirmed) {
-                                    window.location.href = "?page=carousal_slide";
+                                    window.location.href = "?page=video";
                                     }
                             });
                         </script>';
@@ -89,8 +90,8 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
           </script>";
         }
     } else {
-        $insert_sql = "INSERT INTO carousel_img_slide (img_resource, img_source, img_regdate) 
-        VALUES ('$imgonweb', 'รูปจากเว็บไซต์', NOW())";
+        $insert_sql = "INSERT INTO video (video_title ,img_resource, img_source,video_link, video_update) 
+        VALUES ('$videotitle','$upload_url','เว็บไซต์','$videolink', NOW())";
         if ($connection->query($insert_sql) === TRUE) {
             // สำเร็จ
             echo '
@@ -101,7 +102,7 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
                         text: "ข้อมูลถูกบันทึกลงในฐานข้อมูล",
                 }).then(function(result) {
                         if (result.isConfirmed) {
-                        window.location.href = "?page=carousal_slide";
+                        window.location.href = "?page=video";
                         }
                 });
             </script>';
@@ -121,12 +122,12 @@ if (isset($_POST['carousal']) && $_POST['carousal'] == "create") {
 if (isset($_GET['delete_img'])) {
     $deleteImgId = $_GET['delete_img'];
 
-    // Assuming you have a column named 'img_id' in your table
-    $sql = "SELECT * FROM `carousel_img_slide` WHERE `img_id` = $deleteImgId";
+    // Assuming you have a column named 'video_id' in your table
+    $sql = "SELECT * FROM `video` WHERE `video_id` = $deleteImgId";
     $result = $connection->query($sql);
     $imgRow = $result->fetch_assoc();
 
-    if ($imgRow && isset($imgRow['img_id']) && $imgRow['img_id'] == $deleteImgId) {
+    if ($imgRow && isset($imgRow['video_id']) && $imgRow['video_id'] == $deleteImgId) {
         echo "<script>
         Swal.fire({
             title: 'คุณแน่ใจ?',
@@ -140,7 +141,7 @@ if (isset($_GET['delete_img'])) {
         }).then((result) => {
             if (result.isConfirmed) {
                 // User clicked 'Yes', proceed with deletion
-                window.location.href = '?page=delete&&deletetype=carousal_img&&confirm_delete=$deleteImgId';
+                window.location.href = '?page=delete&&deletetype=video&&confirm_delete=$deleteImgId';
             }
         });
     </script>";
@@ -161,21 +162,21 @@ if (isset($_GET['delete_img'])) {
 
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg light:border-gray-700 mt-14">
-        <button data-modal-target="carousal-create" data-modal-toggle="carousal-create" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        <button data-modal-target="video-create" data-modal-toggle="video-create" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
             เพิ่มรูปภาพ
         </button>
 
         <div class="flex flex-wrap py-5 ">
-            <?php $sql = "SELECT * FROM `carousel_img_slide`";
+            <?php $sql = "SELECT * FROM `video`";
             $result = $connection->query($sql); ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3">
                     <a href="#" onclick="openModal('<?php echo $row['img_resource']; ?>')">
-                        <img class="rounded-t-lg" src="<?php echo $row['img_resource']; ?>" alt="" />
+                        <img class="rounded-t-lg" src="<?php echo $row['img_resource']; ?>" alt="<?php echo $row['video_title']; ?>" />
                     </a>
                     <div class="p-5 ">
                         <div class="mb-3 flex flex-wrap justify-between">
-                            <p class=" text-xs text-gray-700 dark:text-gray-400">วันที่อัพโหลด: <?php echo $row['img_regdate']; ?></p>
+                            <p class=" text-xs text-gray-700 dark:text-gray-400">ชื่อคลิป: <?php echo $row['video_title']; ?></p>
                             <p class=" text-xs text-gray-700 dark:text-gray-400">แหล่งที่มาภาพ: <?php echo $row['img_source']; ?></p>
 
                         </div>
@@ -194,7 +195,17 @@ if (isset($_GET['delete_img'])) {
                             </div>
                             ดูรูปเพิ่มเติม
                         </a>
-                        <a href="?page=carousal_slide&&delete_img=<?php echo $row['img_id']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        <a href="<?php echo $row['video_link']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            
+                            <div class="pr-1">
+                            <svg class="w-5 h-5 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M11.4 5H5a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2v-6.4a3 3 0 0 1-1.7-1.6l-3 3A3 3 0 1 1 10 9.8l3-3A3 3 0 0 1 11.4 5Z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M13.2 4c0-.6.5-1 1-1H20c.6 0 1 .4 1 1v5.8a1 1 0 1 1-2 0V6.4l-6.2 6.2a1 1 0 0 1-1.4-1.4L17.6 5h-3.4a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
+                            </svg>
+                            </div>
+                            ลิ้งก์
+                        </a>
+                        <a href="?page=video&&delete_img=<?php echo $row['video_id']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                             <div class="pr-1">
                                 <svg class="w-5 h-5  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M8.6 2.6A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4c0-.5.2-1 .6-1.4ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd" />
@@ -212,17 +223,17 @@ if (isset($_GET['delete_img'])) {
     </div>
 </div>
 
-<!-- carousal create  -->
-<div id="carousal-create" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<!-- video create  -->
+<div id="video-create" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full" style="max-width: 35rem;">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    เพิ่มรูปภาพสไลด์
+                    เพิ่มวิดีโอ
                 </h3>
-                <button type="button" id="carousal-create-close" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="carousal-create">
+                <button type="button" id="video-create-close" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="video-create">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -230,8 +241,22 @@ if (isset($_GET['delete_img'])) {
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5 carousal-create-body" action="" method="post" enctype="multipart/form-data">
+            <form class="p-4 md:p-5 video-create-body" action="" method="post" enctype="multipart/form-data">
                 <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2" >
+                        <label for="videotitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อคลิปวิดีโอ</label>
+                        <input type="text" name="videotitle" id="videotitle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required>
+                        <label  class="hidden mt-5 flex flex-col items-center justify-center w-full  border-2 border-gray-300 border-dashed rounded-lg  bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6"></div>
+                        </label>
+                    </div>
+                    <div class="col-span-2" >
+                        <label for="videolink" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ลิ้งก์เชื่อมโยงไปยังคลิปวิดีโอ</label>
+                        <input type="text" name="videolink" id="videolink" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="เช่น https://youtu.be/yw_08bzRXvk?si=-AlbV4w02Dsbsar_" required >
+                        <label  class="hidden mt-5 flex flex-col items-center justify-center w-full  border-2 border-gray-300 border-dashed rounded-lg  bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6"></div>
+                        </label>
+                    </div>
                     <div class="col-span-2" id="option-image">
                         <label for="option-image-category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">แหล่งที่มาภาพ</label>
                         <select id="option-image-category" name="option-image-category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -265,7 +290,7 @@ if (isset($_GET['delete_img'])) {
                     </div>
 
                 </div>
-                <button type="submit" name="carousal" value="create" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" name="video" value="create" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                     </svg>
@@ -354,13 +379,13 @@ if (isset($_GET['delete_img'])) {
         });
 
 
-        const modal = document.getElementById('carousal-create');
-        const closeModalBtn = document.getElementById('carousal-create-close');
+        const modal = document.getElementById('video-create');
+        const closeModalBtn = document.getElementById('video-create-close');
 
         closeModalBtn.addEventListener('click', () => {
             // ดำเนินการล้างค่าหรือทำอย่างอื่นตามที่คุณต้องการ
             // ตัวอย่าง: ล้างค่า input fields
-            const inputFields = document.querySelectorAll('.carousal-create-body input');
+            const inputFields = document.querySelectorAll('.video-create-body input');
             inputFields.forEach((input) => {
                 input.value = '';
             });
