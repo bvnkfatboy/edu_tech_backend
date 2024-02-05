@@ -149,7 +149,7 @@ if (isset($_GET['delete_img'])) {
 ?>
 
 
-<?php include_once("component/layout/sidebar.php") ?>
+<?php include_once("component/layout/include/sidebar.php") ?>
 
 <div id="imageModal" class="z-50 fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center " onclick="closeModal()">
     <div class="modal-content rounded-lg animate__animated animate__fadeIn" style="max-width:1500px;" onclick="event.stopPropagation()">

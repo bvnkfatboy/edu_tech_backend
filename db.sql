@@ -28,21 +28,66 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`acc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.accounts: ~1 rows (approximately)
+-- Dumping data for table edu_tech_db.accounts: ~0 rows (approximately)
 REPLACE INTO `accounts` (`acc_id`, `acc_user`, `acc_pass`, `acc_name`) VALUES
 	(1, 'admin', '$2y$10$bl00r/Iu5cNPWpSuoVqpiu0uvEosk0tJNZCCJJYMD..hzeFGIx6Ne', 'ADMIN');
 
--- Dumping structure for table edu_tech_db.carousel-img-slide
-CREATE TABLE IF NOT EXISTS `carousel-img-slide` (
+-- Dumping structure for table edu_tech_db.article
+CREATE TABLE IF NOT EXISTS `article` (
+  `article_id` int(5) NOT NULL AUTO_INCREMENT,
+  `article_title` tinytext NOT NULL,
+  `img_resource` text NOT NULL,
+  `img_source` varchar(50) NOT NULL,
+  `article_link` tinytext NOT NULL,
+  `article_update` timestamp NOT NULL DEFAULT current_timestamp(),
+  `img_location` text NOT NULL,
+  PRIMARY KEY (`article_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table edu_tech_db.article: ~0 rows (approximately)
+
+-- Dumping structure for table edu_tech_db.carousel_img_slide
+CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
   `img_id` int(5) NOT NULL AUTO_INCREMENT,
   `img_resource` text NOT NULL,
   `img_source` varchar(50) NOT NULL,
-  `img_regdate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `img_regdate` timestamp NOT NULL DEFAULT current_timestamp(),
   `img_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `img_location` text NOT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.carousel-img-slide: ~0 rows (approximately)
+-- Dumping data for table edu_tech_db.carousel_img_slide: ~1 rows (approximately)
+REPLACE INTO `carousel_img_slide` (`img_id`, `img_resource`, `img_source`, `img_regdate`, `img_update`, `img_location`) VALUES
+	(12, 'http://localhost/edu_tech_backend/dist/img/carousal/20240131072033.png', 'คอมพิวเตอร์', '2024-01-31 06:20:33', '2024-01-31 06:20:33', 'dist/img/carousal/20240131072033.png');
+
+-- Dumping structure for table edu_tech_db.gallery
+CREATE TABLE IF NOT EXISTS `gallery` (
+  `img_id` int(5) NOT NULL AUTO_INCREMENT,
+  `img_title` tinytext NOT NULL,
+  `img_resource` text NOT NULL,
+  `img_source` varchar(50) NOT NULL,
+  `img_link` tinytext NOT NULL,
+  `img_update` timestamp NOT NULL DEFAULT current_timestamp(),
+  `img_location` text NOT NULL,
+  PRIMARY KEY (`img_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table edu_tech_db.gallery: ~1 rows (approximately)
+
+-- Dumping structure for table edu_tech_db.video
+CREATE TABLE IF NOT EXISTS `video` (
+  `video_id` int(5) NOT NULL AUTO_INCREMENT,
+  `video_title` tinytext NOT NULL,
+  `img_resource` text NOT NULL,
+  `img_source` varchar(50) NOT NULL,
+  `video_link` tinytext NOT NULL,
+  `video_update` timestamp NOT NULL DEFAULT current_timestamp(),
+  `img_location` text NOT NULL,
+  PRIMARY KEY (`video_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table edu_tech_db.video: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

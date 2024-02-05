@@ -150,7 +150,7 @@ if (isset($_GET['delete_img'])) {
 ?>
 
 
-<?php include_once("component/layout/sidebar.php") ?>
+<?php include_once("component/layout/include/sidebar.php") ?>
 
 <div id="imageModal" class="z-50 fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center " onclick="closeModal()">
     <div class="modal-content rounded-lg animate__animated animate__fadeIn" style="max-width:1500px;" onclick="event.stopPropagation()">
@@ -196,7 +196,6 @@ if (isset($_GET['delete_img'])) {
                             ดูรูปเพิ่มเติม
                         </a>
                         <a href="<?php echo $row['video_link']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            
                             <div class="pr-1">
                             <svg class="w-5 h-5 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" d="M11.4 5H5a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2v-6.4a3 3 0 0 1-1.7-1.6l-3 3A3 3 0 1 1 10 9.8l3-3A3 3 0 0 1 11.4 5Z" clip-rule="evenodd"/>

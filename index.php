@@ -68,26 +68,26 @@
       echo $output;
       break;
     case ('carousal_slide'):
-      include_once 'component/carousal_index_slide.php';
+      include_once 'component/layout/carousal_index_slide.php';
       $title = "Carousal Index Slide";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
       
     case ('gallery'):
-      include_once 'component/image_gallery.php';
+      include_once 'component/layout/image_gallery.php';
       $title = "Image gallery";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('article'):
-      include_once 'component/article.php';
+      include_once 'component/layout/article.php';
       $title = "Article";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('video'):
-      include_once 'component/video.php';
+      include_once 'component/layout/video.php';
       $title = "Video";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
