@@ -93,6 +93,27 @@
       echo $output;
       break;
 
+    // หน้าใหม่
+    case ('learning_media'):
+      include_once 'component/layout/group_media/learning_media.php';
+      $title = "ผลิตสื่อการเรียนรู้";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+    case ('request_media'):
+      include_once 'component/layout/group_media/request_media.php';
+      $title = "ผลิตสื่อตามร้องขอ";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+    case ('request_media'):
+      include_once 'component/layout/group_media/request_media.php';
+      $title = "พัฒนาและประเมินผลสื่อ";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+
+
     case ('delete'):
       include_once 'component/management/getDelete.php';
       $title = "DELETE";

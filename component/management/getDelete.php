@@ -102,6 +102,78 @@ switch ($delete) {
                 header('Location: ?page=video');
             }
     }
+    case ('learning_media'):
+
+        $deleteImgId = $_GET['confirm_delete'];
+        // Sanitize and validate the input
+        $deleteImgId = mysqli_real_escape_string($connection, $deleteImgId);
+        $sql = "SELECT img_location FROM learning_media WHERE media_id = $deleteImgId";
+        $result = $connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $file_to_delete = $row['img_location'];
+        
+            // ลบข้อมูลจากฐานข้อมูล
+            $sql_delete = "DELETE FROM learning_media WHERE media_id = $deleteImgId";
+            $connection->query($sql_delete);
+        
+            // ลบไฟล์จากเครื่อง
+            if (file_exists($file_to_delete)) {
+                unlink($file_to_delete);
+                header('Location: ?page=learning_media');
+            } else {
+                header('Location: ?page=learning_media');
+            }
+    }
+    case ('request_media'):
+
+        $deleteImgId = $_GET['confirm_delete'];
+        // Sanitize and validate the input
+        $deleteImgId = mysqli_real_escape_string($connection, $deleteImgId);
+        $sql = "SELECT img_location FROM request_media WHERE media_id = $deleteImgId";
+        $result = $connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $file_to_delete = $row['img_location'];
+        
+            // ลบข้อมูลจากฐานข้อมูล
+            $sql_delete = "DELETE FROM request_media WHERE media_id = $deleteImgId";
+            $connection->query($sql_delete);
+        
+            // ลบไฟล์จากเครื่อง
+            if (file_exists($file_to_delete)) {
+                unlink($file_to_delete);
+                header('Location: ?page=request_media');
+            } else {
+                header('Location: ?page=request_media');
+            }
+    }
+    case ('evaluate_media'):
+
+        $deleteImgId = $_GET['confirm_delete'];
+        // Sanitize and validate the input
+        $deleteImgId = mysqli_real_escape_string($connection, $deleteImgId);
+        $sql = "SELECT img_location FROM evaluate_media WHERE media_id = $deleteImgId";
+        $result = $connection->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $file_to_delete = $row['img_location'];
+        
+            // ลบข้อมูลจากฐานข้อมูล
+            $sql_delete = "DELETE FROM evaluate_media WHERE media_id = $deleteImgId";
+            $connection->query($sql_delete);
+        
+            // ลบไฟล์จากเครื่อง
+            if (file_exists($file_to_delete)) {
+                unlink($file_to_delete);
+                header('Location: ?page=evaluate_media');
+            } else {
+                header('Location: ?page=evaluate_media');
+            }
+    }
 
 }
 $connection->close();

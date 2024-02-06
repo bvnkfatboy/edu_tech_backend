@@ -21,6 +21,17 @@ if ($database != '') {
         case ('video'):
             $sql = "SELECT * FROM video";
             break;
+
+        case ('evaluate_media'):
+            $sql = "SELECT * FROM evaluate_media";
+            break;
+        case ('learning_media'):
+            $sql = "SELECT * FROM learning_media";
+            break;
+        case ('request_media'):
+            $sql = "SELECT * FROM request_media";
+            break;
+
         default:
             echo json_encode(["error" => "Invalid type"],JSON_UNESCAPED_UNICODE);
             exit;

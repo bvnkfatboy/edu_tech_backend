@@ -11,3 +11,13 @@ http://localhost/edu_tech_backend/component/API/getAPI.php?database=article
 
 ฐาน Video
 http://localhost/edu_tech_backend/component/API/getAPI.php?database=video
+
+
+ฐาน evaluate_media
+http://localhost/edu_tech_backend/component/API/getAPI.php?database=evaluate_media
+
+ฐาน learning_media
+http://localhost/edu_tech_backend/component/API/getAPI.php?database=learning_media
+
+ฐาน request_media
+http://localhost/edu_tech_backend/component/API/getAPI.php?database=request_media

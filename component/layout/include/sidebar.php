@@ -5,10 +5,15 @@ $connection = $dbConnection->getConnection();
 
 include_once('component/management/getCountData.php');
 
-$rowCarouseCount = countCarouselRows($connection);
-$rowGalleryCount = countGalleryRows($connection);
-$rowArticleCount = countArticleRows($connection);
-$rowVideoCount = countVideoRows($connection);
+$rowCarouseCount = countRows($connection,'carousel_img_slide');
+$rowGalleryCount = countRows($connection,'gallery');
+$rowArticleCount = countRows($connection,'article');
+$rowVideoCount = countRows($connection,'video');
+
+$rowMedia1Count = countRows($connection,'learning_media');
+$rowMedia2Count = countRows($connection,'request_media');
+$rowMedia3Count = countRows($connection,'evaluate_media');
+
 ?>
 <nav class="fixed top-0 z-40 w-full bg-white border-b border-gray-200 light:bg-gray-800 light:border-gray-700">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
@@ -134,9 +139,21 @@ $rowVideoCount = countVideoRows($connection);
         </button>
         <ul id="dropdown-menu-2" class="hidden py-2 space-y-2">
           <li>
-            <a href="?page=carousal_slide" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+            <a href="?page=learning_media" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
               <span class="flex-1 ms-3 whitespace-nowrap">ผลิตสื่อการเรียนรู้</span>
-              <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full light:bg-blue-900 light:text-blue-300"><?php echo $rowCarouseCount; ?></span>
+              <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full light:bg-blue-900 light:text-blue-300"><?php echo $rowMedia1Count; ?></span>
+            </a>
+          </li>
+          <li>
+            <a href="?page=request_media" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <span class="flex-1 ms-3 whitespace-nowrap">ผลิตสื่อตามร้องขอ</span>
+              <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full light:bg-blue-900 light:text-blue-300"><?php echo $rowMedia2Count; ?></span>
+            </a>
+          </li>
+          <li>
+            <a href="?page=evaluate_media" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <span class="flex-1 ms-3 whitespace-nowrap">ประเมินผลสื่อ</span>
+              <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full light:bg-blue-900 light:text-blue-300"><?php echo $rowMedia3Count; ?></span>
             </a>
           </li>
           <!-- <li>
