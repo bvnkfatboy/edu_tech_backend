@@ -1,4 +1,13 @@
 <?php
+
+
+$myURL = 'http://' . $_SERVER['HTTP_HOST'] . '/edu_tech_backend/';
+
+#dist/img/logo.png
+$favicon = "https://www.oar.ubu.ac.th/new/img/OAR_UBU2.png";
+$logo = "https://www.oar.ubu.ac.th/new/img/OAR_UBU2.png";
+
+
 class DbConnection{
  
     private $host = 'localhost';
@@ -28,11 +37,5 @@ class DbConnection{
     }
 }
 
-
-?>
-
-<?php 
-
-$myURL = 'http://' . $_SERVER['HTTP_HOST'] . '/edu_tech_backend/';
 
 ?>

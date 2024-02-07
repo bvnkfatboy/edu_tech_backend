@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <?php $output = '<title>%TITLE%</title>'; ?>
+  <?php include_once('config.php');?>
+  <?php echo '<link rel="icon" href="' . $favicon . '" type="image/png">';?>
 </head>
 
 <body class="font-kanit">
