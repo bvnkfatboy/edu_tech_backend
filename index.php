@@ -9,6 +9,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
   <?php $output = '<title>%TITLE%</title>'; ?>
 </head>
 
@@ -18,27 +19,27 @@
   session_start();
 
   $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-  // if (!isset($_SESSION['acc_id']) && $_GET['page'] !== 'login') {
-  //   echo '
-  //   <script>
-  //     Swal.fire({
-  //         icon: "error",
-  //         title: "คุณยังไม่ได้เข้าสู่ระบบ",
-  //         text: "คุณจะถูกเปลี่ยนเส้นทางภายใน 2 วินาที",
-  //     }).then(function() {
-  //         // นับเวลาถอยหลังและ Redirect ไปที่หน้าอื่น
-  //         var countdown = 0;
-  //         var countdownInterval = setInterval(function() {
-  //             countdown--;
-  //             if (countdown <= 0) {
-  //                 clearInterval(countdownInterval);
-  //                 window.location.href = "?page=login";
-  //             }
-  //         }, 1000);
-  //     });
-  //   </script>';
-  //   exit();
-  // }
+  if (!isset($_SESSION['acc_id']) && $current_page !== 'login') {
+    echo '
+    <script>
+      Swal.fire({
+          icon: "error",
+          title: "คุณยังไม่ได้เข้าสู่ระบบ",
+          text: "คุณจะถูกเปลี่ยนเส้นทางภายใน 2 วินาที",
+      }).then(function() {
+          // นับเวลาถอยหลังและ Redirect ไปที่หน้าอื่น
+          var countdown = 0;
+          var countdownInterval = setInterval(function() {
+              countdown--;
+              if (countdown <= 0) {
+                  clearInterval(countdownInterval);
+                  window.location.href = "?page=login";
+              }
+          }, 1000);
+      });
+    </script>';
+    exit();
+  }
 
 
   switch ($current_page) {
@@ -106,8 +107,27 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
-    case ('request_media'):
-      include_once 'component/layout/group_media/request_media.php';
+    case ('evaluate_media'):
+      include_once 'component/layout/group_media/evaluate_media.php';
+      $title = "พัฒนาและประเมินผลสื่อ";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+
+    case ('product_service'):
+      include_once 'component/layout/group_product/product_service.php';
+      $title = "ผลิตสื่อการเรียนรู้";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+    case ('room_service'):
+      include_once 'component/layout/group_product/room_service.php';
+      $title = "ผลิตสื่อตามร้องขอ";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
+    case ('service'):
+      include_once 'component/layout/group_product/service.php';
       $title = "พัฒนาและประเมินผลสื่อ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;

@@ -172,16 +172,16 @@ if (isset($_GET['delete_img'])) {
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3">
                     <a href="#" onclick="openModal('<?php echo $row['img_resource']; ?>')">
-                        <img class="rounded-t-lg" src="<?php echo $row['img_resource']; ?>" alt="<?php echo $row['article_title']; ?>" />
+                        <img class="rounded-lg img_detail_menu" src="<?php echo $row['img_resource']; ?>" alt="<?php echo $row['article_title']; ?>" />
                     </a>
-                    <div class="p-5 ">
+                    <div class="p-5">
                         <div class="mb-3 flex flex-wrap justify-between">
                             <p class=" text-xs text-gray-700 dark:text-gray-400">ชื่อบทความ: <?php echo $row['article_title']; ?></p>
                             <p class=" text-xs text-gray-700 dark:text-gray-400">แหล่งที่มาภาพ: <?php echo $row['img_source']; ?></p>
 
                         </div>
-
                         <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="openModal('<?php echo $row['img_resource']; ?>')">
+                            
                             <div class="pr-1">
                                 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                                     <defs>
@@ -196,8 +196,8 @@ if (isset($_GET['delete_img'])) {
                         </a>
                         <a href="<?php echo $row['article_link']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
 
-                            <div class="pr-1">
-                            <svg class="w-5 h-5 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <div class="pr-1 flex">
+                            <svg class="w-5 h-5 dark:text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" d="M11.4 5H5a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2v-6.4a3 3 0 0 1-1.7-1.6l-3 3A3 3 0 1 1 10 9.8l3-3A3 3 0 0 1 11.4 5Z" clip-rule="evenodd"/>
                                 <path fill-rule="evenodd" d="M13.2 4c0-.6.5-1 1-1H20c.6 0 1 .4 1 1v5.8a1 1 0 1 1-2 0V6.4l-6.2 6.2a1 1 0 0 1-1.4-1.4L17.6 5h-3.4a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
                             </svg>

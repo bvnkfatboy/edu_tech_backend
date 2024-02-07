@@ -7,3 +7,19 @@
 .swal2-popup{
     font-family: 'Kanit', sans-serif !important;
 }
+
+.img_detail_menu{
+    /* width: 302px !important;
+    height: 302px !important;
+    object-fit: cover !important; Optional: Maintain aspect ratio and cover container */
+
+    width: 300px !important;
+    height: 200px !important;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+}

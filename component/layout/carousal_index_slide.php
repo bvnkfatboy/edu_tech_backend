@@ -170,8 +170,8 @@ if (isset($_GET['delete_img'])) {
             $result = $connection->query($sql); ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3">
-                    <a href="#" onclick="openModal('<?php echo $row['img_resource']; ?>')">
-                        <img class="rounded-t-lg" src="<?php echo $row['img_resource']; ?>" alt="" />
+                    <a href="#"class="" onclick="openModal('<?php echo $row['img_resource']; ?>')">
+                        <img class="rounded-lg img_detail_menu" src="<?php echo $row['img_resource']; ?>" alt="" />
                     </a>
                     <div class="p-5 ">
                         <div class="mb-3 flex flex-wrap justify-between">

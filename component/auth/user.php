@@ -1,6 +1,6 @@
 <?php
 include_once('./component/security/data_encpt.php');
-
+include_once('config.php');
 class User extends DbConnection{
     
     public function __construct(){
@@ -46,7 +46,23 @@ class User extends DbConnection{
         }
     }
     
-
+    public function responDataSQL($conn, $data, $userid) {
+        $sql = "SELECT $data FROM accounts WHERE acc_id = $userid";
+        $result = $conn->query($sql);
+    
+        // ตรวจสอบว่ามีข้อมูลที่ได้รับหรือไม่
+        if ($result->num_rows > 0) {
+            // ดึงข้อมูลเป็น array
+            $row = $result->fetch_assoc();
+    
+            // คืนค่าข้อมูลที่ดึงได้
+            return $row[$data];
+        } else {
+            // ถ้าไม่พบข้อมูล
+            return "ไม่พบข้อมูล";
+        }
+    }
+    
     
  
     public function details($sql){

@@ -31,6 +31,15 @@ if ($database != '') {
         case ('request_media'):
             $sql = "SELECT * FROM request_media";
             break;
+        case ('product_service'):
+            $sql = "SELECT * FROM product_service";
+            break;
+        case ('room_service'):
+            $sql = "SELECT * FROM room_service";
+            break;
+        case ('service'):
+            $sql = "SELECT * FROM services ";
+            break;
 
         default:
             echo json_encode(["error" => "Invalid type"],JSON_UNESCAPED_UNICODE);
