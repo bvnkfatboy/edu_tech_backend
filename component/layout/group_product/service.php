@@ -152,8 +152,10 @@ if (isset($_GET['delete_img'])) {
         </button>
 
         <div class="flex flex-wrap py-5 ">
-            <?php $sql = "SELECT * FROM `group_media` WHEHE `group` = 'services'";
-            $result = $connection->query($sql); ?>
+            <?php 
+            $sql = "SELECT * FROM `group_media` WHERE `group` = 'services'";
+            $result = $connection->query($sql); 
+            ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3">
                     <a href="#" onclick="openModal('<?php echo $row['img_resource']; ?>')">

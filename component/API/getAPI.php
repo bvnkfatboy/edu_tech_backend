@@ -23,24 +23,24 @@ if ($database != '') {
             break;
 
         case ('evaluate_media'):
-            $sql = "SELECT * FROM evaluate_media WHERE group = evaluate_media";
+            $sql = "SELECT * FROM group_media WHERE `group` = 'evaluate_media'";
             break;
         case ('learning_media'):
-            $sql = "SELECT * FROM learning_media WHERE group = learning_media";
+            $sql = "SELECT * FROM group_media WHERE `group` = 'learning_media'";
             break;
         case ('request_media'):
-            $sql = "SELECT * FROM request_media WHERE group = request_media";
+            $sql = "SELECT * FROM group_media WHERE `group` = 'request_media'";
             break;
         case ('product_service'):
-            $sql = "SELECT * FROM product_service WHERE group = product_service";
+            $sql = "SELECT * FROM group_media WHERE `group` = 'product_service'";
             break;
         case ('room_service'):
-            $sql = "SELECT * FROM room_service WHERE group = room_service";
+            $sql = "SELECT * FROM group_media WHERE `group` = 'room_service'";
             break;
         case ('service'):
-            $sql = "SELECT * FROM services WHERE group = services";
+            $sql = "SELECT * FROM group_media WHERE `group` = 'services'";
             break;
-
+            
         default:
             echo json_encode(["error" => "Invalid type"],JSON_UNESCAPED_UNICODE);
             exit;

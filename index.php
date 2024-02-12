@@ -134,7 +134,7 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
-    case ('service'):
+    case ('services'):
       include_once 'component/layout/group_product/service.php';
       $title = "พัฒนาและประเมินผลสื่อ";
       $output = str_replace('%TITLE%', $title, $output);
