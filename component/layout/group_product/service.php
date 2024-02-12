@@ -3,7 +3,7 @@
 include_once('config.php');
 $dbConnection = new DbConnection();
 $connection = $dbConnection->getConnection();
-
+include_once('component/management/getDelete.php');
 
 
 // var_dump($_POST);
@@ -34,8 +34,8 @@ if (isset($_POST['services']) && $_POST['services'] == "create") {
                 // บันทึกไฟล์
                 if (move_uploaded_file($_FILES['imagepc']['tmp_name'], $upload_file)) {
                     $upload_url = $myURL.''. $upload_file;
-                    $insert_sql = "INSERT INTO services (media_title , img_resource, img_source,media_link, media_date,img_location,media_type) 
-                    VALUES ('$mediatitle','$upload_url', 'คอมพิวเตอร์','$medialink', NOW(),'$upload_file','$option_type')";
+                    $insert_sql = "INSERT INTO group_media (media_title , img_resource, img_source,media_link, media_date,img_location,media_type,`group`) 
+                    VALUES ('$mediatitle','$upload_url', 'คอมพิวเตอร์','$medialink', NOW(),'$upload_file','$option_type','services')";
                     if ($connection->query($insert_sql) === TRUE) {
                         // สำเร็จ
                         echo '
@@ -91,8 +91,8 @@ if (isset($_POST['services']) && $_POST['services'] == "create") {
           </script>";
         }
     } else {
-        $insert_sql = "INSERT INTO services (media_title , img_resource, img_source,media_link, media_date,media_type) 
-        VALUES ('$mediatitle','$imgonweb', 'เว็บไซต์','$medialink', NOW(),'$option_type')";
+        $insert_sql = "INSERT INTO group_media (media_title , img_resource, img_source,media_link, media_date,media_type,`group`) 
+        VALUES ('$mediatitle','$imgonweb', 'เว็บไซต์','$medialink', NOW(),'$option_type','services')";
         if ($connection->query($insert_sql) === TRUE) {
             // สำเร็จ
             echo '
@@ -124,28 +124,12 @@ if (isset($_GET['delete_img'])) {
     $deleteImgId = $_GET['delete_img'];
 
     // Assuming you have a column named 'media_id' in your table
-    $sql = "SELECT * FROM `services` WHERE `media_id` = $deleteImgId";
+    $sql = "SELECT * FROM `group_media` WHERE `media_id` = $deleteImgId AND `group` = 'services'";
     $result = $connection->query($sql);
     $imgRow = $result->fetch_assoc();
 
     if ($imgRow && isset($imgRow['media_id']) && $imgRow['media_id'] == $deleteImgId) {
-        echo "<script>
-        Swal.fire({
-            title: 'คุณแน่ใจ?',
-            text: 'คุณจะไม่สามารถย้อนกลับได้!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ตกลง',
-            cancelButtonText: 'ยกเลิก',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // User clicked 'Yes', proceed with deletion
-                window.location.href = '?page=delete&&deletetype=services&&confirm_delete=$deleteImgId';
-            }
-        });
-    </script>";
+        deleteGroupImageAndData($connection,$deleteImgId,'services');
     }
 }
 ?>
@@ -168,7 +152,7 @@ if (isset($_GET['delete_img'])) {
         </button>
 
         <div class="flex flex-wrap py-5 ">
-            <?php $sql = "SELECT * FROM `services`";
+            <?php $sql = "SELECT * FROM `group_media` WHEHE `group` = 'services'";
             $result = $connection->query($sql); ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-3">

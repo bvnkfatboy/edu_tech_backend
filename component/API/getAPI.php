@@ -23,22 +23,22 @@ if ($database != '') {
             break;
 
         case ('evaluate_media'):
-            $sql = "SELECT * FROM evaluate_media";
+            $sql = "SELECT * FROM evaluate_media WHERE group = evaluate_media";
             break;
         case ('learning_media'):
-            $sql = "SELECT * FROM learning_media";
+            $sql = "SELECT * FROM learning_media WHERE group = learning_media";
             break;
         case ('request_media'):
-            $sql = "SELECT * FROM request_media";
+            $sql = "SELECT * FROM request_media WHERE group = request_media";
             break;
         case ('product_service'):
-            $sql = "SELECT * FROM product_service";
+            $sql = "SELECT * FROM product_service WHERE group = product_service";
             break;
         case ('room_service'):
-            $sql = "SELECT * FROM room_service";
+            $sql = "SELECT * FROM room_service WHERE group = room_service";
             break;
         case ('service'):
-            $sql = "SELECT * FROM services ";
+            $sql = "SELECT * FROM services WHERE group = services";
             break;
 
         default:

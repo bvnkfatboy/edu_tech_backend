@@ -10,13 +10,13 @@ $rowGalleryCount = countRows($connection,'gallery');
 $rowArticleCount = countRows($connection,'article');
 $rowVideoCount = countRows($connection,'video');
 
-$rowMedia1Count = countRows($connection,'learning_media');
-$rowMedia2Count = countRows($connection,'request_media');
-$rowMedia3Count = countRows($connection,'evaluate_media');
+$rowMedia1Count = countGroupRows($connection,'learning_media');
+$rowMedia2Count = countGroupRows($connection,'request_media');
+$rowMedia3Count = countGroupRows($connection,'evaluate_media');
 
-$rowService1Count = countRows($connection,'product_service');
-$rowService2Count = countRows($connection,'room_service');
-$rowService3Count = countRows($connection,'services');
+$rowService1Count = countGroupRows($connection,'product_service');
+$rowService2Count = countGroupRows($connection,'room_service');
+$rowService3Count = countGroupRows($connection,'services');
 
 $user = new User();
 
@@ -63,7 +63,7 @@ $getAdminName = $user->responDataSQL($connection,'acc_name',$_SESSION['acc_id'])
             </div>
             <ul class="py-1" role="none">
               <li>
-                <a href="?page=dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:text-gray-300 light:hover:bg-gray-600 light:hover:text-white" role="menuitem">Dashboard</a>
+                <a href="?page=profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:text-gray-300 light:hover:bg-gray-600 light:hover:text-white" role="menuitem">แก้ไขข้อมูล</a>
               </li>
               <li>
                 <a href="?page=logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 light:text-gray-300 light:hover:bg-gray-600 light:hover:text-white" role="menuitem">ออกจากระบบ</a>
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var isDropdownOpen = localStorage.getItem(dropdownId + "-dropdownOpen");
 
     // If the dropdown state is 'open', remove the 'hidden' class
-    if (isDropdownOpen === "open" || dropdownId === "dropdown-menu-1") {
+    if (isDropdownOpen === "open") {
       dropdownMenu.classList.remove("hidden");
     }
 

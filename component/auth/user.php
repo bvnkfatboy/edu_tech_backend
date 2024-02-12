@@ -30,6 +30,45 @@ class User extends DbConnection{
     
     
 
+public function updateMember($username, $newUsername, $newPassword) {
+    // ตรวจสอบว่ามีการรับค่ารหัสผ่านใหม่หรือไม่
+    if (!empty($newPassword)) {
+        $passwordEncryptor = new PasswordEncryptor();
+        // เข้ารหัสรหัสผ่านใหม่ก่อนที่จะบันทึกลงในฐานข้อมูล
+        $encryptedPassword = $passwordEncryptor->encryptPassword($newPassword);
+
+        $sql = "UPDATE accounts SET acc_name = ?, acc_pass = ? WHERE acc_user = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sss", $newUsername, $encryptedPassword, $username);
+        $stmt->execute();
+
+        // ตรวจสอบว่ามีการอัปเดตข้อมูลหรือไม่
+        if ($stmt->affected_rows > 0) {
+            return true; // อัปเดตสำเร็จ
+        } else {
+            return false; // ไม่สามารถอัปเดตข้อมูลได้
+        }
+    } else {
+        // หากไม่มีการรับค่ารหัสผ่านใหม่ ไม่ต้องทำการอัปเดตรหัสผ่าน
+        // แต่ยังอัปเดตชื่อบัญชี (acc_name) ได้
+        $sql = "UPDATE accounts SET acc_name = ? WHERE acc_user = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss", $newUsername, $username);
+        $stmt->execute();
+
+        // ตรวจสอบว่ามีการอัปเดตข้อมูลหรือไม่
+        if ($stmt->affected_rows > 0) {
+            return true; // อัปเดตสำเร็จ
+        } else {
+            return false; // ไม่สามารถอัปเดตข้อมูลได้
+        }
+    }
+}
+
+
+
+
+
     public function checkUsesMember($username) {
         $sql = "SELECT * FROM accounts WHERE acc_user = ?";
         $stmt = $this->conn->prepare($sql);

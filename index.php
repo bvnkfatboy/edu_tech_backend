@@ -63,6 +63,12 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
+    case ('profile'):
+      include_once 'component/auth/profile.php';
+      $title = "Profile";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
 
     case ('dashboard'):
       include_once 'component/dashboard.php';
