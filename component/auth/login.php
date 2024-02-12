@@ -7,7 +7,7 @@ $passwordEncryptor = new PasswordEncryptor();
 
 // Check if user is already logged in
 if (isset($_SESSION['acc_id'])) {
-    header("Location: ?page=dashboard");
+    header("Location: ?page=carousal_slide");
     exit();
 }
 
@@ -18,7 +18,7 @@ if (isset($_POST['auth']) && $_POST['auth'] == "login") {
     $auth = $user->checkMember($username, $password);
     if ($auth) {
 
-        // Login successful, redirect to dashboard
+        // Login successful, redirect to carousal_slide
         $_SESSION['acc_id'] = $auth;
         echo '<script>
                 Swal.fire({
@@ -27,7 +27,7 @@ if (isset($_POST['auth']) && $_POST['auth'] == "login") {
                     text: "เข้าสู่ระบบเสร็จสิ้น",
                 }).then(function(result) {
                     if (result.isConfirmed) {
-                        window.location.href = "?page=dashboard";
+                        window.location.href = "?page=carousal_slide";
                     }
                 });
              </script>';

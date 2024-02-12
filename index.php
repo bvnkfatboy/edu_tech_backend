@@ -20,7 +20,7 @@
   <?php
   session_start();
 
-  $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+  $current_page = isset($_GET['page']) ? $_GET['page'] : 'carousal_slide';
   if (!isset($_SESSION['acc_id']) && $current_page !== 'login') {
     echo '
     <script>
@@ -70,12 +70,6 @@
       echo $output;
       break;
 
-    case ('dashboard'):
-      include_once 'component/dashboard.php';
-      $title = "Dashboard";
-      $output = str_replace('%TITLE%', $title, $output);
-      echo $output;
-      break;
     case ('carousal_slide'):
       include_once 'component/layout/carousal_index_slide.php';
       $title = "Carousal Index Slide";
@@ -148,6 +142,12 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
+    case ('about'):
+      include_once 'component/about.php';
+      $title = "เกี่ยวกับ";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
 
 
 
@@ -157,8 +157,13 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
   }
+  
   ?>
-
+  <?php 
+  if ( $current_page !== 'login' && $current_page != "profile" ) {
+    include_once("component/layout/include/footer.php") ;
+  }
+  ?>
   <script src="tailwind.config.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

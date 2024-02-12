@@ -8,7 +8,7 @@ $dbConnection = new DbConnection();
 $connection = $dbConnection->getConnection();
 // Check if user is already logged in
 // if (isset($_SESSION['acc_id'])) {
-//     header("Location: ?page=dashboard");
+//     header("Location: ?page=carousal_slide");
 //     exit();
 // }
 
@@ -34,7 +34,7 @@ if (isset($_POST['auth']) && $_POST['auth'] == "edit") {
                         text: "อัปเดตข้อมูลเสร็จสิ้น",
                     }).then(function(result) {
                         if (result.isConfirmed) {
-                            window.location.href = "?page=dashboard";
+                            window.location.href = "?page=carousal_slide";
                         }
                     });
                  </script>';
@@ -63,7 +63,7 @@ if (isset($_POST['auth']) && $_POST['auth'] == "edit") {
                         text: "อัปเดตข้อมูลเสร็จสิ้น",
                     }).then(function(result) {
                         if (result.isConfirmed) {
-                            window.location.href = "?page=dashboard";
+                            window.location.href = "?page=carousal_slide";
                         }
                     });
                  </script>';
@@ -136,7 +136,7 @@ extract($row);
                   </div>
 
                   <button type="submit" name="auth" value="edit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center light:bg-primary-600 light:hover:bg-primary-700 light:focus:ring-primary-800">แก้ไขข้อมูล</button>
-                  <a href="?page=dashboard" class="w-full block text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5   text-center light:bg-primary-600 light:hover:bg-primary-700 light:focus:ring-primary-800">กลับหน้าแรก</a>
+                  <a href="?page=carousal_slide" class="w-full block text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5   text-center light:bg-primary-600 light:hover:bg-primary-700 light:focus:ring-primary-800">กลับหน้าแรก</a>
               </form>
           </div>
       </div>
