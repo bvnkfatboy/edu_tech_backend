@@ -1,6 +1,6 @@
 <?php
-include_once('./component/security/data_encpt.php');
-include_once('config.php');
+require_once('./component/security/data_encpt.php');
+require_once('config.php');
 class User extends DbConnection{
     
     public function __construct(){

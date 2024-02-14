@@ -1,10 +1,10 @@
-<?php include_once('config.php'); ?>
+<?php require_once('config.php'); ?>
 <?php
 $dbConnection = new DbConnection();
 $connection = $dbConnection->getConnection();
 
-include_once('component/management/getCountData.php');
-include_once('component/auth/user.php');
+require_once('component/management/getCountData.php');
+require_once('component/auth/user.php');
 $rowCarouseCount = countRows($connection,'carousel_img_slide');
 $rowGalleryCount = countRows($connection,'gallery');
 $rowArticleCount = countRows($connection,'article');

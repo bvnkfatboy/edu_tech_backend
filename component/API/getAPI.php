@@ -1,7 +1,7 @@
 <?php 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
-include_once('../../config.php');
+require_once('../../config.php');
 $dbConnection = new DbConnection();
 $connection = $dbConnection->getConnection();
 

@@ -1,7 +1,7 @@
 <?php 
-include_once('config.php');
-include_once('component/auth/user.php');
-include_once('component/security/data_encpt.php');
+require_once('config.php');
+require_once('component/auth/user.php');
+require_once('component/security/data_encpt.php');
 
 $user = new User();
 $passwordEncryptor = new PasswordEncryptor();
@@ -59,7 +59,7 @@ if (isset($_POST['auth']) && $_POST['auth'] == "create") {
 
 
 
-<?php include_once("component/layout/include/sidebar.php") ?>
+<?php require_once("component/layout/include/sidebar.php") ?>
 
 <div class="p-4 sm:ml-64">
    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg light:border-gray-700 mt-14">

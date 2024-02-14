@@ -1,5 +1,5 @@
 <?php
-include_once('config.php');
+require_once('config.php');
 $dbConnection = new DbConnection();
 $connection = $dbConnection->getConnection();
 

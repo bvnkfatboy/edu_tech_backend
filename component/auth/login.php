@@ -1,6 +1,6 @@
 <?php
-include_once('user.php');
-include_once('component/security/data_encpt.php');
+require_once('user.php');
+require_once('component/security/data_encpt.php');
 
 $user = new User();
 $passwordEncryptor = new PasswordEncryptor();

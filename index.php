@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <?php $output = '<title>%TITLE%</title>'; ?>
-  <?php include_once('config.php');?>
+  <?php require_once('config.php');?>
   <?php echo '<link rel="icon" href="' . $favicon . '" type="image/png">';?>
 </head>
 
@@ -46,57 +46,57 @@
 
   switch ($current_page) {
     case ('login'):
-      include_once 'component/auth/login.php';
+      require_once 'component/auth/login.php';
       $title = "เข้าสู่ระบบ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('logout'):
-      include_once 'component/auth/logout.php';
+      require_once 'component/auth/logout.php';
       $title = "เข้าสู่ระบบ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('member'):
-      include_once 'component/management/member.php';
+      require_once 'component/management/member.php';
       $title = "Member";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('memberProfile'):
-      include_once 'component/management/profile.php';
+      require_once 'component/management/profile.php';
       $title = "Member Profile";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('profile'):
-      include_once 'component/auth/profile.php';
+      require_once 'component/auth/profile.php';
       $title = "Profile";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
 
     case ('carousal_slide'):
-      include_once 'component/layout/carousal_index_slide.php';
+      require_once 'component/layout/carousal_index_slide.php';
       $title = "Carousal Index Slide";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
       
     case ('gallery'):
-      include_once 'component/layout/image_gallery.php';
+      require_once 'component/layout/image_gallery.php';
       $title = "Image gallery";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('article'):
-      include_once 'component/layout/article.php';
+      require_once 'component/layout/article.php';
       $title = "Article";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('video'):
-      include_once 'component/layout/video.php';
+      require_once 'component/layout/video.php';
       $title = "Video";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
@@ -104,38 +104,38 @@
 
     // หน้าใหม่
     case ('learning_media'):
-      include_once 'component/layout/group_media/learning_media.php';
+      require_once 'component/layout/group_media/learning_media.php';
       $title = "ผลิตสื่อการเรียนรู้";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('request_media'):
-      include_once 'component/layout/group_media/request_media.php';
+      require_once 'component/layout/group_media/request_media.php';
       $title = "ผลิตสื่อตามร้องขอ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('evaluate_media'):
-      include_once 'component/layout/group_media/evaluate_media.php';
+      require_once 'component/layout/group_media/evaluate_media.php';
       $title = "พัฒนาและประเมินผลสื่อ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
 
     case ('product_service'):
-      include_once 'component/layout/group_product/product_service.php';
+      require_once 'component/layout/group_product/product_service.php';
       $title = "ผลิตสื่อการเรียนรู้";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('room_service'):
-      include_once 'component/layout/group_product/room_service.php';
+      require_once 'component/layout/group_product/room_service.php';
       $title = "ผลิตสื่อตามร้องขอ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('services'):
-      include_once 'component/layout/group_product/service.php';
+      require_once 'component/layout/group_product/service.php';
       $title = "พัฒนาและประเมินผลสื่อ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
@@ -143,13 +143,13 @@
 
 
     case ('delete'):
-      include_once 'component/management/getDelete.php';
+      require_once 'component/management/getDelete.php';
       $title = "DELETE";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
     case ('about'):
-      include_once 'component/about.php';
+      require_once 'component/about.php';
       $title = "เกี่ยวกับ";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
@@ -158,7 +158,7 @@
 
 
     default:
-      // include_once 'error404.php';
+      // require_once 'error404.php';
       $title = "ERROR PAGE";
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
@@ -167,7 +167,7 @@
   ?>
   <?php 
   if ( $current_page !== 'login' && $current_page != "profile" ) {
-    include_once("component/layout/include/footer.php") ;
+    require_once("component/layout/include/footer.php") ;
   }
   ?>
   <script src="tailwind.config.js"></script>
