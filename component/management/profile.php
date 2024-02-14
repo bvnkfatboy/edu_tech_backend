@@ -201,7 +201,7 @@ if (isset($_GET['memberID'])) {
                   </div>
 
                   <button type="submit" name="auth" value="edit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center light:bg-primary-600 light:hover:bg-primary-700 light:focus:ring-primary-800">แก้ไขข้อมูล</button>
-                  <a href="?page=carousal_slide" class="w-full block text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5   text-center light:bg-primary-600 light:hover:bg-primary-700 light:focus:ring-primary-800">กลับหน้าแรก</a>
+                  <a href="?page=member" class="w-full block text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5   text-center light:bg-primary-600 light:hover:bg-primary-700 light:focus:ring-primary-800">กลับหน้าสมาชิก</a>
               </form>
           </div>
       </div>
