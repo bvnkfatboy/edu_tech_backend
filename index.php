@@ -155,8 +155,6 @@
       echo $output;
       break;
 
-
-
     default:
       // require_once 'error404.php';
       $title = "ERROR PAGE";
