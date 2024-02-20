@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`acc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.accounts: ~1 rows (approximately)
+-- Dumping data for table edu_tech_db.accounts: ~0 rows (approximately)
 INSERT INTO `accounts` (`acc_id`, `acc_user`, `acc_pass`, `acc_name`) VALUES
 	(1, 'admin', '$2y$10$bl00r/Iu5cNPWpSuoVqpiu0uvEosk0tJNZCCJJYMD..hzeFGIx6Ne', 'Theerapong Tha-in');
 
@@ -38,15 +38,18 @@ CREATE TABLE IF NOT EXISTS `article` (
   `article_title` tinytext NOT NULL,
   `img_resource` text NOT NULL,
   `img_source` varchar(50) NOT NULL,
-  `article_link` tinytext NOT NULL,
+  `article_link` varchar(150) NOT NULL DEFAULT '',
   `article_update` timestamp NOT NULL DEFAULT current_timestamp(),
-  `img_location` text NOT NULL,
+  `img_location` varchar(150) NOT NULL DEFAULT '',
+  `editor_text` text NOT NULL,
+  `event_img` text NOT NULL,
   PRIMARY KEY (`article_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table edu_tech_db.article: ~1 rows (approximately)
-INSERT INTO `article` (`article_id`, `article_title`, `img_resource`, `img_source`, `article_link`, `article_update`, `img_location`) VALUES
-	(1, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/article/20240212084403.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:44:03', 'dist/img/article/20240212084403.png');
+-- Dumping data for table edu_tech_db.article: ~2 rows (approximately)
+INSERT INTO `article` (`article_id`, `article_title`, `img_resource`, `img_source`, `article_link`, `article_update`, `img_location`, `editor_text`, `event_img`) VALUES
+	(21, 'ฟหกฟหกฟหกฟห', 'http://localhost/edu_tech_backend/dist/img/article/20240219071747.jpg', 'คอมพิวเตอร์', '', '2024-02-19 06:17:47', 'dist/img/article/20240219071747.jpg', '<p>ฟกดฟหกดฟหกด</p>', '[{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3bd4e.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3bd4e.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3c0aa.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3c0aa.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3c3db.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3c3db.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3c738.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3c738.jpg"}]'),
+	(22, 'ฟหกฟหกฟหก', 'http://localhost/edu_tech_backend/dist/img/article/20240219072700.jpg', 'คอมพิวเตอร์', '', '2024-02-19 06:27:00', 'dist/img/article/20240219072700.jpg', '<p>ฟหกฟหกฟหกฟหกฟหกฟหก</p>', '[]');
 
 -- Dumping structure for table edu_tech_db.carousel_img_slide
 CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
@@ -59,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
   PRIMARY KEY (`img_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.carousel_img_slide: ~1 rows (approximately)
+-- Dumping data for table edu_tech_db.carousel_img_slide: ~0 rows (approximately)
 INSERT INTO `carousel_img_slide` (`img_id`, `img_resource`, `img_source`, `img_regdate`, `img_update`, `img_location`) VALUES
 	(2, 'https://www.oar.ubu.ac.th/new//upload/slideshow/f59834af3138dbf73964fa32af30c8bb.png', 'รูปจากเว็บไซต์', '2024-02-12 07:43:19', '2024-02-12 07:43:19', '');
 
@@ -75,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   PRIMARY KEY (`img_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.gallery: ~1 rows (approximately)
+-- Dumping data for table edu_tech_db.gallery: ~0 rows (approximately)
 INSERT INTO `gallery` (`img_id`, `img_title`, `img_resource`, `img_source`, `img_link`, `img_update`, `img_location`) VALUES
 	(1, 'asd', 'http://localhost/edu_tech_backend/dist/img/gallery/20240212084334.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:43:34', 'dist/img/gallery/20240212084334.png');
 
@@ -93,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `group_media` (
   PRIMARY KEY (`media_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.group_media: ~9 rows (approximately)
+-- Dumping data for table edu_tech_db.group_media: ~8 rows (approximately)
 INSERT INTO `group_media` (`media_id`, `media_title`, `img_resource`, `img_source`, `media_link`, `media_date`, `img_location`, `media_type`, `group`) VALUES
 	(1, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/learning_media/20240212084841.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:09:43', 'dist/img/learning_media/20240212084841.png', 'ภาพหลัก', 'learning_media'),
 	(2, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/learning_media/20240212084852.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:09:52', 'dist/img/learning_media/20240212084852.png', 'ตัวอย่าง', 'learning_media'),
@@ -115,14 +118,14 @@ CREATE TABLE IF NOT EXISTS `video` (
   `video_update` timestamp NOT NULL DEFAULT current_timestamp(),
   `img_location` text NOT NULL,
   PRIMARY KEY (`video_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table edu_tech_db.video: ~4 rows (approximately)
+-- Dumping data for table edu_tech_db.video: ~3 rows (approximately)
 INSERT INTO `video` (`video_id`, `video_title`, `img_resource`, `img_source`, `video_link`, `video_update`, `img_location`) VALUES
-	(1, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240212084421.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:44:21', 'dist/img/video/20240212084421.png'),
-	(2, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240212084447.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:44:47', 'dist/img/video/20240212084447.png'),
-	(3, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240212084457.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:44:57', 'dist/img/video/20240212084457.png'),
-	(4, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240212084507.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:45:07', 'dist/img/video/20240212084507.png');
+	(5, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071051.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:10:51', 'dist/img/video/20240215071051.png'),
+	(6, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071102.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:11:02', 'dist/img/video/20240215071102.png'),
+	(7, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071110.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:11:10', 'dist/img/video/20240215071110.png'),
+	(8, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071118.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:11:18', 'dist/img/video/20240215071118.png');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

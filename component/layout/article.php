@@ -11,8 +11,13 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
     $option = $_POST['option-image-category'];
     $imgonweb = $_POST['imageweb'];
     $articletitle = $_POST['articletitle'];
-    $articlelink = $_POST['articlelink'];
     $editor_text = $_POST['editor_text'];
+    
+    // echo json_encode($_FILES['multiple_files'], JSON_UNESCAPED_UNICODE);
+
+
+    // $multiple_files = $_POST['multiple_files'];
+
     if ($option == 'PC') {
 
         if (isset($_FILES['imagepc']) && $_FILES['imagepc']['error'] === UPLOAD_ERR_OK) {
@@ -33,9 +38,51 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
 
                 // บันทึกไฟล์
                 if (move_uploaded_file($_FILES['imagepc']['tmp_name'], $upload_file)) {
+
+                    if(count($_FILES['multiple_files']['name']) > 0){
+                        // มีไฟล์ถูกอัปโหลด
+                        $images = array();
+                    
+                        // วนลูปผ่านไฟล์ที่อัปโหลด
+                        foreach($_FILES['multiple_files']['tmp_name'] as $key => $tmp_name ){
+                            $file_name = $_FILES['multiple_files']['name'][$key];
+                            $file_tmp = $_FILES['multiple_files']['tmp_name'][$key];
+                    
+                            // อัปโหลดไฟล์ไปยังโฟลเดอร์ที่กำหนด
+                            $upload_dir = "dist/img/article/event/";
+                            $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION)); // ดึงนามสกุลของไฟล์
+                            $new_file_name = date('YmdHis') . '_' . uniqid() . '.' . $file_extension; // เพิ่ม timestamp และ uniqid เพื่อป้องกันการซ้ำซ้อน
+                            $target_file = $upload_dir . basename($new_file_name);
+                    
+                            // URL ของไฟล์ที่อัปโหลด
+                            // $myURL = 'http://' . $_SERVER['HTTP_HOST'] . '/edu_tech_backend/';
+                            $image_url = $myURL . $target_file;
+                    
+                            // เคลื่อนย้ายไฟล์ไปยังโฟลเดอร์ปลายทาง
+                            if(move_uploaded_file($file_tmp, $target_file)){
+                                // เพิ่มข้อมูลลงใน JSON
+                                $image_data = array(
+                                    "image_url" => $image_url,
+                                    "image_dir" => $target_file
+                                );
+                                $images[] = $image_data;
+                            }
+                        }
+                    
+                        // แปลงรายชื่อไฟล์เป็น JSON
+                        $json_images = json_encode($images);
+                    } else {
+                        // ไม่มีไฟล์ถูกอัปโหลด
+                        // กำหนดค่า json_images เป็น JSON ว่าง
+                        $json_images = json_encode(array());
+                    }
+                    
+                    
+
+
                     $upload_url = $myURL.''. $upload_file;
-                    $insert_sql = "INSERT INTO article (article_title , img_resource, img_source,article_link, article_update,img_location,editor_text) 
-                    VALUES ('$articletitle','$upload_url', 'คอมพิวเตอร์','$articlelink', NOW(),'$upload_file','$editor_text')";
+                    $insert_sql = "INSERT INTO article (article_title , img_resource, img_source, article_update,img_location,editor_text,event_img) 
+                    VALUES ('$articletitle','$upload_url', 'คอมพิวเตอร์', NOW(),'$upload_file','$editor_text','$json_images')";
                     if ($connection->query($insert_sql) === TRUE) {
                         // สำเร็จ
                         echo '
@@ -90,34 +137,8 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
             });
           </script>";
         }
-    } else {
-        $insert_sql = "INSERT INTO article (article_title ,img_resource, img_source,article_link, article_update) 
-        VALUES ('$articletitle','$upload_url','เว็บไซต์','$articlelink', NOW())";
-        if ($connection->query($insert_sql) === TRUE) {
-            // สำเร็จ
-            echo '
-            <script>
-                Swal.fire({
-                        icon: "success",
-                        title: "บันทึกข้อมูลสำเร็จ!",
-                        text: "ข้อมูลถูกบันทึกลงในฐานข้อมูล",
-                }).then(function(result) {
-                        if (result.isConfirmed) {
-                        window.location.href = "?page=article";
-                        }
-                });
-            </script>';
-        } else {
-            // ไม่สำเร็จ
-            echo "<script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'ข้อผิดพลาด!',
-                        text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
-                    });
-                </script>";
-        }
-    }
+    } 
+    
 }
 
 if (isset($_GET['delete_img'])) {
@@ -149,10 +170,6 @@ if (isset($_GET['delete_img'])) {
     }
 }
 ?>
-
-<style>
-</style>
-
 <?php require_once("component/layout/include/sidebar.php") ?>
 
 <div id="imageModal" class="z-50 fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center " onclick="closeModal()">
@@ -166,7 +183,7 @@ if (isset($_GET['delete_img'])) {
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg light:border-gray-700 mt-14">
         <button data-modal-target="article-create" data-modal-toggle="article-create" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-            เพิ่มรูปภาพ
+        เพิ่มบทความ
         </button>
 
         <div class="flex flex-wrap py-5 ">
@@ -253,7 +270,7 @@ if (isset($_GET['delete_img'])) {
                             <input type="text" name="articletitle" id="articletitle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required>
                         </div>
                         <div class="col-span-2" id="option-image">
-                            <label for="option-image-category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">แหล่งที่มาภาพ</label>
+                            <label for="option-image-category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ภาพปก (แหล่งที่มาภาพ)</label>
                             <select id="option-image-category" name="option-image-category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
                                 <option value="WEB">เว็บไซต์</option>
@@ -291,7 +308,14 @@ if (isset($_GET['delete_img'])) {
                             <label for="articletitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เขียนบทความ</label>
                             <textarea id="editor" name="editor_text" class="w-full h-64 border-gray-300 rounded-md"></textarea>
                         </div>
+                        <div class="mt-3">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">อัพโหลดภาพกิจกรรม</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" name="multiple_files[]" type="file" multiple>
+
+                        </div>
+
                     </div>
+
                 </div>
 
                 <button type="submit" name="article" value="create" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -307,7 +331,34 @@ if (isset($_GET['delete_img'])) {
 
 
 <script>
+
+    
     document.addEventListener('DOMContentLoaded', function() {
+
+        document.getElementById('multiple_files').addEventListener('change', function() {
+            var files = this.files;
+            var validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var extension = file.name.split('.').pop().toLowerCase();
+                
+                if (validExtensions.indexOf(extension) === -1) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ผิดพลาด',
+                        text: 'ไฟล์ที่เลือกไม่ใช่รูปภาพที่ถูกต้อง (.jpg, .jpeg, .png, .gif)',
+                        confirmButtonText: 'ตกลง'
+                    });
+                    this.value = ''; // Clear input field
+                    return;
+                }
+            }
+        });
+
+
+
+
         var dropzone = document.getElementById('dropzone-file');
         var main = document.getElementById('main');
         dropzone.addEventListener('change', handleFileSelect);
