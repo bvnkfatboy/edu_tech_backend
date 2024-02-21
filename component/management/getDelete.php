@@ -85,7 +85,7 @@ switch ($delete) {
         $deleteImgId = $_GET['confirm_delete'];
         // Sanitize and validate the input
         $deleteImgId = mysqli_real_escape_string($connection, $deleteImgId);
-        $sql = "SELECT img_location FROM article WHERE article_id = $deleteImgId";
+        $sql = "SELECT * FROM article WHERE article_id = $deleteImgId";
         $result = $connection->query($sql);
 
         if ($result->num_rows > 0) {
@@ -95,6 +95,21 @@ switch ($delete) {
             // ลบข้อมูลจากฐานข้อมูล
             $sql_delete = "DELETE FROM article WHERE article_id = $deleteImgId";
             $connection->query($sql_delete);
+
+            $json_data = $row['event_img'];
+
+            // Decode the JSON data into an array
+            $images = json_decode($json_data, true);
+        
+            // Iterate through the images array
+            foreach ($images as $key => $image) {
+                if ($image['image_dir']) {
+
+                    if (file_exists($image['image_dir'])) {
+                        unlink($image['image_dir']);
+                    }
+                }
+            }
 
             // ลบไฟล์จากเครื่อง
             if (file_exists($file_to_delete)) {

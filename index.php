@@ -95,6 +95,12 @@
       $output = str_replace('%TITLE%', $title, $output);
       echo $output;
       break;
+    case ('read_article'):
+      require_once 'component/read_article.php';
+      $title = "Read Article";
+      $output = str_replace('%TITLE%', $title, $output);
+      echo $output;
+      break;
     case ('video'):
       require_once 'component/layout/video.php';
       $title = "Video";

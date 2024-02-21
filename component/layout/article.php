@@ -11,6 +11,7 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
     $option = $_POST['option-image-category'];
     $imgonweb = $_POST['imageweb'];
     $articletitle = $_POST['articletitle'];
+    $articleown = $_POST['articleown'];
     $editor_text = $_POST['editor_text'];
     
     // echo json_encode($_FILES['multiple_files'], JSON_UNESCAPED_UNICODE);
@@ -81,8 +82,8 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
 
 
                     $upload_url = $myURL.''. $upload_file;
-                    $insert_sql = "INSERT INTO article (article_title , img_resource, img_source, article_update,img_location,editor_text,event_img) 
-                    VALUES ('$articletitle','$upload_url', 'คอมพิวเตอร์', NOW(),'$upload_file','$editor_text','$json_images')";
+                    $insert_sql = "INSERT INTO article (article_title ,article_own, img_resource, img_source, article_update,img_location,editor_text,event_img) 
+                    VALUES ('$articletitle','$articleown','$upload_url', 'คอมพิวเตอร์', NOW(),'$upload_file','$editor_text','$json_images')";
                     if ($connection->query($insert_sql) === TRUE) {
                         // สำเร็จ
                         echo '
@@ -214,7 +215,7 @@ if (isset($_GET['delete_img'])) {
                             </div>
                             ดูรูปเพิ่มเติม
                         </a>
-                        <a href="<?php echo $row['article_link']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        <a href="?page=read_article&&article_id=<?php echo $row['article_id']; ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
 
                             <div class="pr-1 flex">
                             <svg class="w-5 h-5 dark:text-white mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -269,13 +270,9 @@ if (isset($_GET['delete_img'])) {
                             <label for="articletitle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อบทความ</label>
                             <input type="text" name="articletitle" id="articletitle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required>
                         </div>
-                        <div class="col-span-2" id="option-image">
-                            <label for="option-image-category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ภาพปก (แหล่งที่มาภาพ)</label>
-                            <select id="option-image-category" name="option-image-category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-
-                                <option value="WEB">เว็บไซต์</option>
-                                <option value="PC" selected>คอม</option>
-                            </select>
+                        <div class="col-span-2" >
+                            <label for="articleown" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ผู้จัดทำบทความ</label>
+                            <input type="text" name="articleown" id="articleown" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required>
                         </div>
                         <div class="col-span-2" id="option-image-1">
                             <label for="imageweb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ลิ้งก์แหล่งที่มาภาพ</label>
