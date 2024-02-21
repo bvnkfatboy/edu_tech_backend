@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`acc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.accounts: ~0 rows (approximately)
+-- Dumping data for table edu_tech_db.accounts: ~1 rows (approximately)
 INSERT INTO `accounts` (`acc_id`, `acc_user`, `acc_pass`, `acc_name`) VALUES
 	(1, 'admin', '$2y$10$bl00r/Iu5cNPWpSuoVqpiu0uvEosk0tJNZCCJJYMD..hzeFGIx6Ne', 'Theerapong Tha-in');
 
@@ -36,6 +36,7 @@ INSERT INTO `accounts` (`acc_id`, `acc_user`, `acc_pass`, `acc_name`) VALUES
 CREATE TABLE IF NOT EXISTS `article` (
   `article_id` int(5) NOT NULL AUTO_INCREMENT,
   `article_title` tinytext NOT NULL,
+  `article_own` tinytext NOT NULL,
   `img_resource` text NOT NULL,
   `img_source` varchar(50) NOT NULL,
   `article_link` varchar(150) NOT NULL DEFAULT '',
@@ -44,12 +45,11 @@ CREATE TABLE IF NOT EXISTS `article` (
   `editor_text` text NOT NULL,
   `event_img` text NOT NULL,
   PRIMARY KEY (`article_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table edu_tech_db.article: ~2 rows (approximately)
-INSERT INTO `article` (`article_id`, `article_title`, `img_resource`, `img_source`, `article_link`, `article_update`, `img_location`, `editor_text`, `event_img`) VALUES
-	(21, 'ฟหกฟหกฟหกฟห', 'http://localhost/edu_tech_backend/dist/img/article/20240219071747.jpg', 'คอมพิวเตอร์', '', '2024-02-19 06:17:47', 'dist/img/article/20240219071747.jpg', '<p>ฟกดฟหกดฟหกด</p>', '[{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3bd4e.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3bd4e.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3c0aa.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3c0aa.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3c3db.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3c3db.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240219071747_65d2f28b3c738.jpg","image_dir":"dist/img/article/event/20240219071747_65d2f28b3c738.jpg"}]'),
-	(22, 'ฟหกฟหกฟหก', 'http://localhost/edu_tech_backend/dist/img/article/20240219072700.jpg', 'คอมพิวเตอร์', '', '2024-02-19 06:27:00', 'dist/img/article/20240219072700.jpg', '<p>ฟหกฟหกฟหกฟหกฟหกฟหก</p>', '[]');
+-- Dumping data for table edu_tech_db.article: ~1 rows (approximately)
+INSERT INTO `article` (`article_id`, `article_title`, `article_own`, `img_resource`, `img_source`, `article_link`, `article_update`, `img_location`, `editor_text`, `event_img`) VALUES
+	(29, 'ศึกษาเรียนรู้การบันทึกรายการในสตูดิโอ', 'ขนิษฐา ทุมมากรณ์', 'http://localhost/edu_tech_backend/dist/img/article/20240221042109.jpg', 'คอมพิวเตอร์', '', '2024-02-21 03:21:09', 'dist/img/article/20240221042109.jpg', '<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ฝ่ายเทคโนโลยีทางการศึกษา เปิดห้องสตูดิโอทองกวาว ให้นักศึกษาหลักสูตรนิเทศศาสตร์ ชั้นปีที่ 3 คณะศิลปศาสตร์ มหาวิทยาลัยอุบลราชธานี จำนวน 30 คน เข้าศึกษาเรียนรู้การบันทึกรายการพร้อมทั้งการใช้งานเครื่องมือและอุปกรณ์ต่าง ๆ ภายในห้องสตูดิโอทองกวาว โดยมีทีมงานผู้เชี่ยวชาญให้คำแนะนำและดูแลอย่างใกล้ชิด เมื่อวันที่ 19 กุมภาพันธ์ 2567</p><p>&nbsp;</p><p>&nbsp;</p><p>สนใจใช้บริการสตูดิโอทองกวาว ติดต่อฝ่ายเทคโนโลยีทางการศึกษา ชั้น 1 อาคารข้อมูลท้องถิ่น โทร.045-353148 โทร.ภายใน 3148, 1832, 1833</p>', '[{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240221042109_65d56c25340f0.jpg","image_dir":"dist/img/article/event/20240221042109_65d56c25340f0.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240221042109_65d56c2534269.jpg","image_dir":"dist/img/article/event/20240221042109_65d56c2534269.jpg"}]');
 
 -- Dumping structure for table edu_tech_db.carousel_img_slide
 CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
   PRIMARY KEY (`img_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.carousel_img_slide: ~0 rows (approximately)
+-- Dumping data for table edu_tech_db.carousel_img_slide: ~1 rows (approximately)
 INSERT INTO `carousel_img_slide` (`img_id`, `img_resource`, `img_source`, `img_regdate`, `img_update`, `img_location`) VALUES
 	(2, 'https://www.oar.ubu.ac.th/new//upload/slideshow/f59834af3138dbf73964fa32af30c8bb.png', 'รูปจากเว็บไซต์', '2024-02-12 07:43:19', '2024-02-12 07:43:19', '');
 
