@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`acc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.accounts: ~1 rows (approximately)
+-- Dumping data for table edu_tech_db.accounts: ~0 rows (approximately)
 INSERT INTO `accounts` (`acc_id`, `acc_user`, `acc_pass`, `acc_name`) VALUES
 	(1, 'admin', '$2y$10$bl00r/Iu5cNPWpSuoVqpiu0uvEosk0tJNZCCJJYMD..hzeFGIx6Ne', 'Theerapong Tha-in');
 
@@ -47,9 +47,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   PRIMARY KEY (`article_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table edu_tech_db.article: ~1 rows (approximately)
-INSERT INTO `article` (`article_id`, `article_title`, `article_own`, `img_resource`, `img_source`, `article_link`, `article_update`, `img_location`, `editor_text`, `event_img`) VALUES
-	(29, 'ศึกษาเรียนรู้การบันทึกรายการในสตูดิโอ', 'ขนิษฐา ทุมมากรณ์', 'http://localhost/edu_tech_backend/dist/img/article/20240221042109.jpg', 'คอมพิวเตอร์', '', '2024-02-21 03:21:09', 'dist/img/article/20240221042109.jpg', '<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ฝ่ายเทคโนโลยีทางการศึกษา เปิดห้องสตูดิโอทองกวาว ให้นักศึกษาหลักสูตรนิเทศศาสตร์ ชั้นปีที่ 3 คณะศิลปศาสตร์ มหาวิทยาลัยอุบลราชธานี จำนวน 30 คน เข้าศึกษาเรียนรู้การบันทึกรายการพร้อมทั้งการใช้งานเครื่องมือและอุปกรณ์ต่าง ๆ ภายในห้องสตูดิโอทองกวาว โดยมีทีมงานผู้เชี่ยวชาญให้คำแนะนำและดูแลอย่างใกล้ชิด เมื่อวันที่ 19 กุมภาพันธ์ 2567</p><p>&nbsp;</p><p>&nbsp;</p><p>สนใจใช้บริการสตูดิโอทองกวาว ติดต่อฝ่ายเทคโนโลยีทางการศึกษา ชั้น 1 อาคารข้อมูลท้องถิ่น โทร.045-353148 โทร.ภายใน 3148, 1832, 1833</p>', '[{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240221042109_65d56c25340f0.jpg","image_dir":"dist/img/article/event/20240221042109_65d56c25340f0.jpg"},{"image_url":"http://localhost/edu_tech_backend/dist/img/article/event/20240221042109_65d56c2534269.jpg","image_dir":"dist/img/article/event/20240221042109_65d56c2534269.jpg"}]');
+-- Dumping data for table edu_tech_db.article: ~0 rows (approximately)
 
 -- Dumping structure for table edu_tech_db.carousel_img_slide
 CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
@@ -60,11 +58,9 @@ CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
   `img_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `img_location` text NOT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.carousel_img_slide: ~1 rows (approximately)
-INSERT INTO `carousel_img_slide` (`img_id`, `img_resource`, `img_source`, `img_regdate`, `img_update`, `img_location`) VALUES
-	(2, 'https://www.oar.ubu.ac.th/new//upload/slideshow/f59834af3138dbf73964fa32af30c8bb.png', 'รูปจากเว็บไซต์', '2024-02-12 07:43:19', '2024-02-12 07:43:19', '');
+-- Dumping data for table edu_tech_db.carousel_img_slide: ~0 rows (approximately)
 
 -- Dumping structure for table edu_tech_db.gallery
 CREATE TABLE IF NOT EXISTS `gallery` (
@@ -76,11 +72,9 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `img_update` timestamp NOT NULL DEFAULT current_timestamp(),
   `img_location` text NOT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table edu_tech_db.gallery: ~0 rows (approximately)
-INSERT INTO `gallery` (`img_id`, `img_title`, `img_resource`, `img_source`, `img_link`, `img_update`, `img_location`) VALUES
-	(1, 'asd', 'http://localhost/edu_tech_backend/dist/img/gallery/20240212084334.png', 'คอมพิวเตอร์', '#', '2024-02-12 07:43:34', 'dist/img/gallery/20240212084334.png');
 
 -- Dumping structure for table edu_tech_db.group_media
 CREATE TABLE IF NOT EXISTS `group_media` (
@@ -97,16 +91,6 @@ CREATE TABLE IF NOT EXISTS `group_media` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table edu_tech_db.group_media: ~8 rows (approximately)
-INSERT INTO `group_media` (`media_id`, `media_title`, `img_resource`, `img_source`, `media_link`, `media_date`, `img_location`, `media_type`, `group`) VALUES
-	(1, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/learning_media/20240212084841.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:09:43', 'dist/img/learning_media/20240212084841.png', 'ภาพหลัก', 'learning_media'),
-	(2, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/learning_media/20240212084852.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:09:52', 'dist/img/learning_media/20240212084852.png', 'ตัวอย่าง', 'learning_media'),
-	(3, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/request_media/20240212084909.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:00', 'dist/img/request_media/20240212084909.png', 'ภาพหลัก', 'request_media'),
-	(4, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/request_media/20240212084918.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:10', 'dist/img/request_media/20240212084918.png', 'ตัวอย่าง', 'request_media'),
-	(5, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/evaluate_media/20240212084930.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:20', 'dist/img/evaluate_media/20240212084930.png', 'ภาพหลัก', 'evaluate_media'),
-	(6, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/evaluate_media/20240212084940.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:30', 'dist/img/evaluate_media/20240212084940.png', 'ตัวอย่าง', 'evaluate_media'),
-	(7, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/product_service/20240212084959.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:37', 'dist/img/product_service/20240212084959.png', 'ภาพหลัก', 'product_service'),
-	(8, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/room_service/20240212085054.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:44', 'dist/img/room_service/20240212085054.png', 'ภาพหลัก', 'room_service'),
-	(9, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/services/20240212085307.png', 'คอมพิวเตอร์', '#', '2024-02-14 04:10:53', 'dist/img/services/20240212085307.png', 'ภาพหลัก', 'services');
 
 -- Dumping structure for table edu_tech_db.video
 CREATE TABLE IF NOT EXISTS `video` (
@@ -121,11 +105,6 @@ CREATE TABLE IF NOT EXISTS `video` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table edu_tech_db.video: ~3 rows (approximately)
-INSERT INTO `video` (`video_id`, `video_title`, `img_resource`, `img_source`, `video_link`, `video_update`, `img_location`) VALUES
-	(5, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071051.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:10:51', 'dist/img/video/20240215071051.png'),
-	(6, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071102.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:11:02', 'dist/img/video/20240215071102.png'),
-	(7, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071110.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:11:10', 'dist/img/video/20240215071110.png'),
-	(8, 'ทดสอบ', 'http://localhost/edu_tech_backend/dist/img/video/20240215071118.png', 'คอมพิวเตอร์', '#', '2024-02-15 06:11:18', 'dist/img/video/20240215071118.png');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
