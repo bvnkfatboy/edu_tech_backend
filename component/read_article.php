@@ -80,8 +80,6 @@ if(isset($_GET['article_id'])) {
                         }
                     }
                 
-                
-                
                 ?>
                 <!-- <img src="" alt="Image 1" class="max-w-[165px] m-2"> -->
             </div>
