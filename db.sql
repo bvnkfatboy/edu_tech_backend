@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `editor_text` text NOT NULL,
   `event_img` text NOT NULL,
   PRIMARY KEY (`article_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table edu_tech_db.article: ~0 rows (approximately)
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `carousel_img_slide` (
   `img_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `img_location` text NOT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table edu_tech_db.carousel_img_slide: ~0 rows (approximately)
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `img_update` timestamp NOT NULL DEFAULT current_timestamp(),
   `img_location` text NOT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table edu_tech_db.gallery: ~0 rows (approximately)
 
@@ -88,9 +88,9 @@ CREATE TABLE IF NOT EXISTS `group_media` (
   `media_type` varchar(50) NOT NULL,
   `group` text NOT NULL,
   PRIMARY KEY (`media_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table edu_tech_db.group_media: ~8 rows (approximately)
+-- Dumping data for table edu_tech_db.group_media: ~0 rows (approximately)
 
 -- Dumping structure for table edu_tech_db.video
 CREATE TABLE IF NOT EXISTS `video` (
@@ -102,9 +102,9 @@ CREATE TABLE IF NOT EXISTS `video` (
   `video_update` timestamp NOT NULL DEFAULT current_timestamp(),
   `img_location` text NOT NULL,
   PRIMARY KEY (`video_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table edu_tech_db.video: ~3 rows (approximately)
+-- Dumping data for table edu_tech_db.video: ~0 rows (approximately)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
