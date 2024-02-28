@@ -8,8 +8,7 @@ $connection = $dbConnection->getConnection();
 
 // var_dump($_POST);
 if (isset($_POST['article']) && $_POST['article'] == "create") {
-    $option = $_POST['option-image-category'];
-    $imgonweb = $_POST['imageweb'];
+
     $articletitle = $_POST['articletitle'];
     $articleown = $_POST['articleown'];
     $editor_text = $_POST['editor_text'];
@@ -18,9 +17,6 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
 
 
     // $multiple_files = $_POST['multiple_files'];
-
-    if ($option == 'PC') {
-
         if (isset($_FILES['imagepc']) && $_FILES['imagepc']['error'] === UPLOAD_ERR_OK) {
             // ตรวจสอบประเภทของไฟล์ (optional)
             $allowed_types = array('jpg', 'jpeg', 'png', 'gif');
@@ -138,8 +134,6 @@ if (isset($_POST['article']) && $_POST['article'] == "create") {
             });
           </script>";
         }
-    } 
-    
 }
 
 if (isset($_GET['delete_img'])) {
@@ -276,10 +270,6 @@ if (isset($_GET['delete_img'])) {
                         </div>
                         <div class="col-span-2" id="option-image-1">
                             <label for="imageweb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ลิ้งก์แหล่งที่มาภาพ</label>
-                            <input type="text" name="imageweb" id="imageweb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="ป้อนลิ้งก์เว็บรูป เช่น www.oo.com/a.jpg">
-                            <label id="imageweb-zone" class="hidden mt-5 flex flex-col items-center justify-center w-full  border-2 border-gray-300 border-dashed rounded-lg  bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6"></div>
-                            </label>
                         </div>
 
 
@@ -402,33 +392,6 @@ if (isset($_GET['delete_img'])) {
         }
 
 
-
-        var imageCategorySelect = document.getElementById("option-image-category");
-        var choiceCategorySelect = document.getElementById("option-choice-article");
-
-        // ดึงอ้างอิงจาก div elements ที่ต้องการจะแสดง/ซ่อน
-        var optionImage1 = document.getElementById("option-image-1");
-        var optionImage2 = document.getElementById("option-image-2");
-
-        // ตรวจสอบค่าเริ่มต้น
-        if (imageCategorySelect.value === "PC") {
-            optionImage1.style.display = "none";
-            optionImage2.style.display = "block";
-        } else {
-            optionImage1.style.display = "block";
-            optionImage2.style.display = "none";
-        }
-
-        // เพิ่ม Event Listener สำหรับการเปลี่ยนแปลงของ select element
-        imageCategorySelect.addEventListener("change", function() {
-            if (imageCategorySelect.value === "PC") {
-                optionImage1.style.display = "none";
-                optionImage2.style.display = "block";
-            } else {
-                optionImage1.style.display = "block";
-                optionImage2.style.display = "none";
-            }
-        });
 
         const modal = document.getElementById('article-create');
         const closeModalBtn = document.getElementById('article-create-close');
